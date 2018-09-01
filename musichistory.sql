@@ -131,21 +131,30 @@ FROM Song s
 
 -- Which album has the most songs?
 
-SELECT Title, AlbumLength
-FROM Album
-ORDER BY AlbumLength ASC
-LIMIT 1
+SELECT a.Title, COUNT(a.AlbumId) as "Number" 
+FROM Album a 
+JOIN Song s ON s.AlbumId = a.AlbumId 
+GROUP BY a.AlbumId 
+ORDER BY "Number" DESC
+LIMIT 1;
 
 --Which genre has been assigned to the most songs?
 
-SELECT g.Label, s.GenreId
-FROM Song s
-JOIN Genre g 
-ORDER BY g.GenreId DESC
-LIMIT 1
+SELECT g.Label, COUNT(s.GenreId) as "Number" 
+FROM Genre g 
+JOIN Song s 
+ON s.GenreId = g.GenreId 
+GROUP BY g.GenreId 
+ORDER BY "Number" DESC 
+LIMIT 1;
 
 --Which record label has released the most albums?
 --To accomplish this, you will need to use the MAX() aggregation function, 
-the GROUP BY clause, the ORDER BY clause, and the LIMIT keyword.
+--the GROUP BY clause, the ORDER BY clause, and the LIMIT keyword.
 
-
+SELECT r.Label, COUNT(a.AlbumId) as "Number" 
+FROM RecordLabel r 
+JOIN Album a ON r.LabelId = a.LabelId 
+GROUP BY r.LabelId 
+ORDER BY "Number" DESC 
+LIMIT 1;

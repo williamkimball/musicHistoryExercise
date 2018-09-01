@@ -715,6 +715,7 @@ INSERT INTO Song
 
 
 
+
 SELECT s.Title 'Song', s.SongLength 'Duration',
 	   al.Title 'Album',
        a.ArtistName 'Artist',
@@ -728,14 +729,14 @@ JOIN Genre g ON s.GenreId = g.GenreId;
 /* List all songs with album information */
 SELECT a.Title 'Album', s.Title 'Song'
 FROM Song s
-LEFT JOIN Album a ON s.AlbumId = a.AlbumId
+LEFT JOIN Album a ON s.AlbumId = a.AlbumId;
 
 
 /* Find Albums with no songs */
 select a.Title 'Album', s.Title 'Song'
 from Album a
 left join Song s on s.AlbumId = a.AlbumId
-where s.Title is null
+where s.Title is null;
 
 
 
